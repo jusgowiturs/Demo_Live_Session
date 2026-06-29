@@ -1,0 +1,83 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5fd45447e490 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x5fd45447e620 .scope module, "mytb" "mytb" 3 1;
+ .timescale 0 0;
+v0x5fd4544cc9b0_0 .var "a1", 0 0;
+v0x5fd4544cca70_0 .var "b1", 0 0;
+v0x5fd4544ccb40_0 .var "c1", 0 0;
+v0x5fd4544ccc40_0 .net "z1", 0 0, L_0x5fd4544cd320;  1 drivers
+S_0x5fd4544b97f0 .scope module, "DUT" "Mycircuit" 3 33, 4 1 0, S_0x5fd45447e620;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "c";
+    .port_info 3 /OUTPUT 1 "z";
+L_0x5fd4544ccd10 .functor NOT 1, v0x5fd4544cc9b0_0, C4<0>, C4<0>, C4<0>;
+L_0x5fd4544ccdb0 .functor AND 1, L_0x5fd4544ccd10, v0x5fd4544cca70_0, C4<1>, C4<1>;
+L_0x5fd4544ccec0 .functor NOT 1, v0x5fd4544ccb40_0, C4<0>, C4<0>, C4<0>;
+L_0x5fd4544ccf80 .functor NOT 1, v0x5fd4544cca70_0, C4<0>, C4<0>, C4<0>;
+L_0x5fd4544cd0c0 .functor AND 1, L_0x5fd4544ccdb0, L_0x5fd4544cd020, C4<1>, C4<1>;
+L_0x5fd4544cd270 .functor NOT 1, v0x5fd4544ccb40_0, C4<0>, C4<0>, C4<0>;
+L_0x5fd4544cd320 .functor AND 1, L_0x5fd4544cd0c0, L_0x5fd4544cd270, C4<1>, C4<1>;
+v0x5fd4544b9a40_0 .net *"_ivl_0", 0 0, L_0x5fd4544ccd10;  1 drivers
+v0x5fd4544cc090_0 .net *"_ivl_10", 0 0, L_0x5fd4544cd0c0;  1 drivers
+v0x5fd4544cc170_0 .net *"_ivl_12", 0 0, L_0x5fd4544cd270;  1 drivers
+v0x5fd4544cc260_0 .net *"_ivl_2", 0 0, L_0x5fd4544ccdb0;  1 drivers
+v0x5fd4544cc340_0 .net *"_ivl_4", 0 0, L_0x5fd4544ccec0;  1 drivers
+v0x5fd4544cc470_0 .net *"_ivl_6", 0 0, L_0x5fd4544ccf80;  1 drivers
+v0x5fd4544cc550_0 .net *"_ivl_8", 0 0, L_0x5fd4544cd020;  1 drivers
+v0x5fd4544cc630_0 .net "a", 0 0, v0x5fd4544cc9b0_0;  1 drivers
+v0x5fd4544cc6f0_0 .net "b", 0 0, v0x5fd4544cca70_0;  1 drivers
+v0x5fd4544cc7b0_0 .net "c", 0 0, v0x5fd4544ccb40_0;  1 drivers
+v0x5fd4544cc870_0 .net "z", 0 0, L_0x5fd4544cd320;  alias, 1 drivers
+L_0x5fd4544cd020 .arith/sum 1, L_0x5fd4544ccec0, L_0x5fd4544ccf80;
+    .scope S_0x5fd45447e620;
+T_0 ;
+    %vpi_call/w 3 4 "$dumpfile", "Mywave.vcd" {0 0 0};
+    %vpi_call/w 3 5 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5fd45447e620 {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x5fd45447e620;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5fd4544cc9b0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5fd4544cca70_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5fd4544ccb40_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5fd4544cca70_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5fd4544cc9b0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5fd4544cca70_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5fd4544ccb40_0, 0, 1;
+    %vpi_call/w 3 20 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x5fd45447e620;
+T_2 ;
+    %vpi_call/w 3 24 "$monitor", "A=%b\011B=%b", v0x5fd4544cc9b0_0, v0x5fd4544cca70_0 {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "mycircuit_tb.sv";
+    "mycircuit.sv";
